@@ -1,0 +1,292 @@
+<mat-drawer-container autosize  [dir]="direction" (window:resize)="onResize($event)"  class="example-container" autosize>
+  <!-- <mat-drawer   #drawer class="example-sidenav" mode="side" [opened]="break"> -->
+  <mat-drawer   #drawer class="example-sidenav" mode="side" [(opened)]="break"
+  mwlResizable
+              [enableGhostResize]="true"
+              [ngStyle]="resizeStyle"
+              [validateResize]="resizeValidate"
+              [resizeEdges]="resizeEdges()"
+              (resizeEnd)="onResizeEnd($event)"
+              >
+
+    <div fxLayout class="logo_container">
+      
+      <div class="user" (click)="onClickListItem('H')">
+        <img  class="user_img" src="../../../assets/images/svg/user (1).png" alt="">
+        
+        
+      </div>
+      <div  fxFlex fxLayout fxLayoutAlign="flex-start">
+        <button class="toggle_btn3" type="button"  mat-icon-button (click)="drawer.toggle(); onToggle()">
+
+          <mat-icon *ngIf="!checkEng()">chevron_left</mat-icon>
+          <mat-icon *ngIf="checkEng()">chevron_right</mat-icon>
+          <!-- <mat-icon>fast_rewind</mat-icon> -->
+        </button>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="menu_item">
+      <ul class="side_list" id="myDIV">
+        <mat-divider></mat-divider>
+        <div class="main_title">
+          <span class="fon">{{pharmM}}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <!-- <li (click)="onClickListItem('C1')" class="side_list_item active"><mat-icon>home</mat-icon><div class="title"> Class</div></li> -->
+        <li (click)="onClickListItem('H')" fxHide class="side_list_item active"><mat-icon>home</mat-icon><div class="title"> {{home}}</div></li>
+        <li (click)="onClickListItem('D')" class="side_list_item "><i class="fas fa-motorcycle"></i><div class="title"> {{ PhDriver }}</div></li>
+        <li (click)="onClickListItem('DP')" class="side_list_item "><i class="fas fa-tag"></i><div class="title"> {{ PhDeliverPrice }}</div></li>
+        <li (click)="onClickListItem('F')" class="side_list_item "><i class="far fa-comments"></i><div class="title"> {{ PhFeedback }}</div></li>
+        <li (click)="onClickListItem('I')" class="side_list_item "><i class="fas fa-file-alt"></i><div class="title"> {{ PhInvoice }}</div></li>
+        <li (click)="onClickListItem('InP')" class="side_list_item "><i class="fas fa-money-check-alt"></i><div class="title"> {{ invPayment }}</div></li>
+        <li (click)="onClickListItem('T')" class="side_list_item "><i class="fas fa-broadcast-tower"></i><div class="title"> {{ PhTrack }}</div></li>
+        <li (click)="onClickListItem('Pr')" class="side_list_item "><i class="fas fa-ad"></i><div class="title"> {{ PhPromo }}</div></li>
+        <li (click)="onClickListItem('N')" class="side_list_item "><i class="fas fa-bell"></i><div class="title"> {{ Notification }}</div></li>
+        <mat-divider></mat-divider>
+        <div class="main_title">
+          <span class="fon">{{config}}</span>
+        </div>
+        <mat-divider></mat-divider>
+        
+        <li (click)="onClickListItem('SC')" class="side_list_item "><i class="fas fa-capsules"></i><div class="title"> {{ PhSaleConf }}</div></li>
+        <li (click)="onClickListItem('L')" class="side_list_item "><i class="fas fa-map-marker-alt"></i><div class="title"> {{ PhLoc }}</div></li>
+        
+        
+        
+        <mat-divider></mat-divider>
+        <div class="main_title">
+          <span class="fon">{{inventory}}</span>
+        </div>
+        <mat-divider></mat-divider>
+        <li (click)="onClickListItem('P')" class="side_list_item "><mat-icon>pages</mat-icon><div class="title"> {{ PhProduct }}</div></li>
+        <li (click)="onClickListItem('PC')" class="side_list_item "><mat-icon>pages</mat-icon><div class="title"> {{ PhProdCat }}</div></li>
+        <li (click)="onClickListItem('PG')" class="side_list_item "><mat-icon>pages</mat-icon><div class="title"> {{ PhProdGroup }}</div></li>
+        
+        <li (click)="onClickListItem('PU')" class="side_list_item "><mat-icon>pages</mat-icon><div class="title"> {{ PhProdUnit }}</div></li>
+        <!-- <li (click)="onClickListItem('MP')" class="side_list_item "><mat-icon>home</mat-icon><div class="title"> {{ PhMoveProd }}</div></li> -->
+        <li (click)="onClickListItem('PP')" class="side_list_item "><mat-icon>pages</mat-icon><div class="title"> {{ PhProdPrice }}</div></li>
+        <li (click)="onClickListItem('PS')" class="side_list_item "><mat-icon>pages</mat-icon><div class="title"> {{ PhProdStock }}</div></li>
+        <li (click)="onClickListItem('PUC')" class="side_list_item "><mat-icon>pages</mat-icon><div class="title"> {{ PhProdUnitCon }}</div></li>
+        <!-- <li (click)="onClickListItem('IP')" class="side_list_item "><mat-icon>home</mat-icon><div class="title"> {{ PhInvProd }}</div></li> -->
+        <li (click)="onClickListItem('SI')" class="side_list_item "><mat-icon>add_shopping_cart</mat-icon><div class="title"> {{ PhStockIn }}</div></li>
+        <!-- <li (click)="onClickListItem('SM')" class="side_list_item "><mat-icon>remove_shopping_cart</mat-icon><div class="title"> {{ PhStockMove }}</div></li> -->
+        <!-- <li (click)="onClickListItem('SP')" class="side_list_item "><mat-icon>home</mat-icon><div class="title"> {{ PhStockProd }}</div></li> -->
+        <!-- <li (click)="onClickListItem('W')" class="side_list_item "><i class="fas fa-warehouse"></i><div class="title"> {{ PhWarehouse }}</div></li> -->
+        <!-- <li (click)="onSignOut()" class="side_list_item"><mat-icon>keyboard_return</mat-icon><div class="title"> {{logout}}</div></li> -->
+      </ul>
+    </div>
+
+
+    <!-- <div class="lang_container" fxLayoutGap="10px">
+      <h3 class="lang">{{change}}</h3>
+      <button class="toggle_btn2" mat-icon-button [matMenuTriggerFor]="menu2"><mat-icon>language</mat-icon></button>
+<mat-menu #menu2="matMenu">
+  <button  class="toggle_btn" (click)="onChangeLanguage()" mat-menu-item>{{lang}}</button>
+  
+</mat-menu>
+      
+    </div> -->
+
+    <div class="markon_logo">
+      <img src="../../../assets/images/svg/Markon logo-white.png" width="60px" height="60px" alt="">
+      
+    </div>
+
+    <!-- <ul class="side_list">
+      <li class="side_list_item"><a class="side_list_item_link" href="">Home</a></li>
+      <li class="side_list_item"><a class="side_list_item_link" href="">Bank</a></li>
+      <li class="side_list_item"><a class="side_list_item_link" href="">Forex</a></li>
+      <li class="side_list_item"><a class="side_list_item_link" href="">Journal</a></li>
+    </ul> -->
+  </mat-drawer>
+
+    <mat-drawer-content>
+
+      <mat-toolbar >
+        <div fxLayout fxLayoutGap.xs="10px" class="nav">
+          <div *ngIf="!break" fxFlex fxLayout fxLayoutAlign="flex-start">
+            <button class="toggle_btn" type="button"  mat-icon-button (click)="drawer.toggle(); onToggle()">
+              <mat-icon>menu</mat-icon>
+            </button>
+          </div>
+
+          <div class="middle" fxLayout  fxLayoutGap="20px">
+            <div class="search_container" >
+              <input type="text" matInput class="search">
+              <mat-icon class="search_icon" aria-label="Example home icon">search</mat-icon>
+            </div>
+
+            <!-- <button  fxHide.xs mat-icon-button class="add_btn" >
+              <mat-icon >add</mat-icon>
+            </button> -->
+
+          
+
+         <!-- <div fxHide.xs fxFlex fxLayout fxLayoutAlign="flex-end">
+          <button mat-icon-button class="toggle_btn" aria-label="Example icon-button with heart icon">
+            <mat-icon>info_outline</mat-icon>
+          </button> -->
+          
+          <!-- <button class="toggle_btn" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>perm_identity</mat-icon></button>
+<mat-menu #menu="matMenu">
+  <button (click)="onSignOut()" class="toggle_btn" mat-menu-item>{{logout}}</button>
+  
+</mat-menu> -->
+          <!-- <button mat-icon-button class="toggle_btn" aria-label="Example icon-button with share icon">
+           <mat-icon>perm_identity</mat-icon> -->
+           <!-- <mat-icon>person_outline</mat-icon> -->
+
+         <!-- </button> -->
+         </div>
+         <div  fxFlex fxLayout fxLayoutAlign="flex-end">
+          <button [matMenuTriggerFor]="menu3" mat-icon-button id="sett" class="toggle_btn" aria-label="Example icon-button with heart icon">
+            <mat-icon class="settings">settings</mat-icon>
+          </button>
+          <mat-menu #menu3="matMenu">
+            <button class="icon" (click)="onChangeLanguage()" mat-menu-item>
+              <i class="fas fa-globe"></i>
+              <span class="logout">{{lang}}</span>
+            </button>
+            <!-- <button class="icon" (click)="onClickListItem('BP')" mat-menu-item>
+              <i class="fas fa-user"></i>
+              <span>{{profile}}</span>
+            </button> -->
+            <button class="icon" (click)="onSignOut()" mat-menu-item>
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="logout">{{logout}}</span>
+            </button>
+            
+            
+            <!-- <ul >
+              <li class="side_list_item2" (click)="onChangeLanguage()" mat-menu-item><mat-icon class="menuIcon">language</mat-icon><div class="title2"> {{lang}}</div></li>
+              <li (click)="onSignOut()" class="side_list_item2" mat-menu-item><mat-icon class="menuIcon">keyboard_return</mat-icon><div class="title2"> {{logout}}</div></li>
+              
+            </ul> -->
+            
+          </mat-menu>
+          
+          <!-- <button class="toggle_btn" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>perm_identity</mat-icon></button>
+<mat-menu #menu="matMenu">
+  <button (click)="onSignOut()" class="toggle_btn" mat-menu-item>{{logout}}</button>
+  
+</mat-menu> -->
+          <!-- <button mat-icon-button class="toggle_btn" aria-label="Example icon-button with share icon">
+           <mat-icon>perm_identity</mat-icon> -->
+           <!-- <mat-icon>person_outline</mat-icon> -->
+
+         <!-- </button> -->
+         </div>
+        </div>
+      </mat-toolbar>
+
+      <div fxLayout class="actions_box_container">
+        <!-- <div *ngIf="!break" (mouseover)="showButton = true" (mouseleave)="showButton = false" class="hoverableSide">
+          <mat-card class="example-card" *ngIf = "showButton">
+    <mat-card-title>hello title</mat-card-title>
+    <mat-card-content>hello content</mat-card-content>
+    <mat-card-actions>
+        <button mat-icon-button ><mat-icon>close</mat-icon></button>
+    </mat-card-actions>
+</mat-card>
+        </div> -->
+        <div class="actions_box">
+          <div [ngSwitch]="navigation">
+            <div *ngSwitchCase="'Home'">
+              <app-system-home></app-system-home>
+            </div>
+            <div *ngSwitchCase="'PhDriver'">
+              <app-PhDriver></app-PhDriver>
+            </div>
+            <div *ngSwitchCase="'PhDeliverPrice'">
+              <app-PhDeliverPrice></app-PhDeliverPrice>
+            </div>
+            <div *ngSwitchCase="'PhFeedback'">
+              <app-PhFeedback></app-PhFeedback>
+            </div>
+            <div *ngSwitchCase="'PhInvoice'">
+              <app-PhInvoice></app-PhInvoice>
+            </div>
+            <div *ngSwitchCase="'PhInvProd'">
+              <app-PhInvProd></app-PhInvProd>
+            </div>
+            <div *ngSwitchCase="'PhLoc'">
+              <app-PhLoc></app-PhLoc>
+            </div>
+            <div *ngSwitchCase="'PhMoveProd'">
+              <app-PhMoveProd></app-PhMoveProd>
+            </div>
+            <div *ngSwitchCase="'PhProdCat'">
+              <app-PhProdCat></app-PhProdCat>
+            </div>
+            <div *ngSwitchCase="'PhProdGroup'">
+              <app-PhProdGroup></app-PhProdGroup>
+            </div>
+            <div *ngSwitchCase="'PhProdPrice'">
+              <app-PhProdPrice></app-PhProdPrice>
+            </div>
+            <div *ngSwitchCase="'PhProdStock'">
+              <app-PhProdStock></app-PhProdStock>
+            </div>
+            <div *ngSwitchCase="'PhProduct'">
+              <app-PhProduct></app-PhProduct>
+            </div>
+            <div *ngSwitchCase="'PhProdUnit'">
+              <app-phprodunit></app-phprodunit>
+            </div>
+            <div *ngSwitchCase="'PhProdUnitCon'">
+              <app-phprodunitcon></app-phprodunitcon>
+            </div>
+            <div *ngSwitchCase="'PhPromo'">
+              <app-PhPromo></app-PhPromo>
+            </div>
+            <div *ngSwitchCase="'PhSaleConf'">
+              <app-PhSaleConf></app-PhSaleConf>
+            </div>
+            <div *ngSwitchCase="'PhStockIn'">
+              <app-PhStockIn></app-PhStockIn>
+            </div>
+            <div *ngSwitchCase="'PhStockMove'">
+              <app-PhStockMove></app-PhStockMove>
+            </div>
+            <div *ngSwitchCase="'PhStockProd'">
+              <app-PhStockProd></app-PhStockProd>
+            </div>
+            <div *ngSwitchCase="'Notification'">
+              <app-notification></app-notification>
+            </div>
+            <div *ngSwitchCase="'PhTrack'">
+              <app-PhTrack></app-PhTrack>
+            </div>
+            <div *ngSwitchCase="'PhWarehouse'">
+              <app-PhWarehouse></app-PhWarehouse>
+            </div>
+            <div *ngSwitchCase="'Class'">
+              <app-schoolclass></app-schoolclass>
+            </div>
+            <div *ngSwitchCase="'FinancialReports'">
+              <app-financial></app-financial>
+            </div>
+            <div *ngSwitchCase="'FinancialReportsPage'">
+              <app-report-page></app-report-page>
+            </div>
+            <div *ngSwitchCase="'InvoicePayment'">
+              <app-phinvoicepayment></app-phinvoicepayment>
+            </div>
+            
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+    </mat-drawer-content>
+
+
+
+</mat-drawer-container>
+

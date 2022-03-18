@@ -1,0 +1,33 @@
+<section class="section" [dir]="direction">
+    <div class="bigMain" fxLayout>
+      <h3 class="fontY">
+        State
+      </h3>
+      <img (click)="onCancel()" class="cancel_Img" src="../../../../assets/images/svg/close.png" alt="">
+    </div>
+    <form class="form">
+        <mat-form-field  appearance="outline">
+            <mat-label>Remarks</mat-label>
+            <input
+              matInput
+              
+              [(ngModel)]="pModel.remarks"
+              name="invId"
+              type="text"
+
+              placeholder="Remarks"
+            />
+
+
+          </mat-form-field>
+    </form>
+    <div class="btn-container2" fxLayoutGap="10px">
+    
+        <button class="BtnC" type="button" mat-button (click)="onReject()">Reject</button>
+        <button type="submit" (click)="onApprove()" mat-button class="BtnS">Approve</button>
+        <!-- <button *ngIf="pModel.entryMode=='A' || pModel.entryMode=='E'"  
+        [disabled]="expensefilingForm.invalid"
+          type="submit" mat-button class="BtnS">{{submit}}</button> -->
+      </div>
+    
+</section>

@@ -1,0 +1,11 @@
+<div fxLayout="column">
+    <h2>Are you sure?</h2>
+    <div class="btn-container2" fxLayoutGap="10px">
+    
+        <button class="BtnC" type="button" mat-button (click)="onNo()">No</button>
+        <button type="submit" (click)="onYes()" mat-button class="BtnS">Yes</button>
+        <!-- <button *ngIf="pModel.entryMode=='A' || pModel.entryMode=='E'"  
+        [disabled]="expensefilingForm.invalid"
+          type="submit" mat-button class="BtnS">{{submit}}</button> -->
+      </div>
+</div>
