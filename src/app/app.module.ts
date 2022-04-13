@@ -229,6 +229,9 @@ import { PhInvoicePaymentComponent } from "./system/generated/phinvoicepayment/p
 import { PhInvoicePaymentEntryComponent } from "./system/generated/phinvoicepayment/phinvoicepayment-entry/phinvoicepayment-entry.component";
 import { NotificationEntryComponent } from "./system/generated/notification/notification-entry/notification-entry.component";
 import { NotificationComponent } from "./system/generated/notification/notification.component";
+import { AvaCheckerComponent } from './ava-checker/ava-checker.component';
+import { AvaLocComponent } from './ava-loc/ava-loc.component';
+import { AvaMedComponent } from './ava-med/ava-med.component';
 
 
 
@@ -458,7 +461,10 @@ export const jwtConfig = {
     PhInvoicePaymentComponent,
     PhInvoicePaymentEntryComponent,
     NotificationComponent,
-    NotificationEntryComponent
+    NotificationEntryComponent,
+    AvaCheckerComponent,
+    AvaLocComponent,
+    AvaMedComponent
     
     
     

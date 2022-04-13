@@ -1,0 +1,25 @@
+<div class="back">
+  <div class="top-box">
+    <h1 class="top-box-title">List control</h1>
+    
+    
+  </div>
+  
+  <div class="top-box-pages">
+    <h1 class="top-box-pages-links">1. Riyadh </h1>
+    <h1 class="top-box-pages-links">2. Manshia</h1>
+    <h1 class="top-box-pages-links">3. Burri </h1>
+  </div>
+  
+  <div class="loc">
+    <form>
+      <mat-form-field class="example-full-width" appearance="outline">
+        <mat-label>Location</mat-label>
+        <input [(ngModel)]="num" [ngModelOptions]="{standalone: true}" (input)="onChange()"  type="number" matInput placeholder="Choose from above">
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="loc2">
+    <button [disabled]="!selected" (click)="onNext()" mat-raised-button color="primary">Submit</button>
+  </div>
+</div>

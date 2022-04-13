@@ -32,6 +32,9 @@ import { ReportPageEmailComponent } from "./components/PR/report-pageemail/repor
 
 // import { DynamicFormComponent } from "./dynamic-form/dynamic-form.component";
 import { SystemNavigationComponent } from "./system/system-navigation/system-navigation.component";
+import { AvaCheckerComponent } from "./ava-checker/ava-checker.component";
+import { AvaLocComponent } from "./ava-loc/ava-loc.component";
+import { AvaMedComponent } from "./ava-med/ava-med.component";
 // import { PharmUserEntryComponent } from "./pharmuser-entry/pharmuser-entry.component";
 // import { PhDriverComponent } from "./PhDriver/PhDriver.component";
 
@@ -44,6 +47,18 @@ const routes: Routes = [
     path: "welcome",
     component: WelcomeComponent,
     data: { title: "Premium Quality Shipping" },
+  },
+  {
+    path: "availabilitychecker",
+    component: AvaCheckerComponent,
+  },
+  {
+    path: "availabilitychecker/:id",
+    component: AvaLocComponent,
+  },
+  {
+    path: "availabilitychecker/:id/:string",
+    component: AvaMedComponent,
   },
   {
     path: "login",
