@@ -84,7 +84,7 @@ export class PhProdCatComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Product category - BluMed")
+    this.titleService.setTitle("Product category - Swahili")
       this.refreshMe();
   }
 

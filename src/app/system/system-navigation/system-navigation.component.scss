@@ -106,6 +106,10 @@ mat-drawer-content {
   animation: slideInFromBottom 0.3s ease-in;
 }
 
+.side_list {
+  padding: 0;
+}
+
 @keyframes slideInFromBottom {
   0% {
     transform: translateX(-100%);

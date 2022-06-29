@@ -85,7 +85,7 @@ export class NotificationComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Notification - BluMed")
+    this.titleService.setTitle("Notification - Swahili")
       this.refreshMe();
   }
 

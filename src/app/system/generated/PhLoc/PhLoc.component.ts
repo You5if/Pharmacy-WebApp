@@ -85,7 +85,7 @@ export class PhLocComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Location - BluMed")
+    this.titleService.setTitle("Location - Swahili")
       this.refreshMe();
   }
 

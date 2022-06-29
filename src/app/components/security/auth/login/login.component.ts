@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.titleService.setTitle("BluMed - Login")
+    this.titleService.setTitle("Swahili - Login")
     // this.googleImagePath = this._globals.baseAPIFileUrl+'/resources/images/btn_google_signin_light_normal_web.png';
     this.valUserObject = {
       username: '',

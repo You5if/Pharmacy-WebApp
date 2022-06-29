@@ -75,7 +75,7 @@ export class PhFeedbackComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Feedback - BluMed")
+    this.titleService.setTitle("Feedback - Swahili")
       this.refreshMe();
   }
 

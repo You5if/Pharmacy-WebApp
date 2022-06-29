@@ -87,7 +87,7 @@ export class PhInvoicePaymentComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Invoice payment - BluMed")
+    this.titleService.setTitle("Invoice payment - Swahili")
       this.refreshMe();
   }
 

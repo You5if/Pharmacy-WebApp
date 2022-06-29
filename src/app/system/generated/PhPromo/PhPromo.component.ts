@@ -86,7 +86,7 @@ export class PhPromoComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Promotion - BluMed")
+    this.titleService.setTitle("Promotion - Swahili")
       this.refreshMe();
   }
 

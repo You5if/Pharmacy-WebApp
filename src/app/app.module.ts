@@ -232,6 +232,7 @@ import { NotificationComponent } from "./system/generated/notification/notificat
 import { AvaCheckerComponent } from './ava-checker/ava-checker.component';
 import { AvaLocComponent } from './ava-loc/ava-loc.component';
 import { AvaMedComponent } from './ava-med/ava-med.component';
+import { MyTestAutoComponent } from "./system/my-test-auto/my-test-auto.component";
 
 
 
@@ -464,7 +465,8 @@ export const jwtConfig = {
     NotificationEntryComponent,
     AvaCheckerComponent,
     AvaLocComponent,
-    AvaMedComponent
+    AvaMedComponent,
+    MyTestAutoComponent
     
     
     

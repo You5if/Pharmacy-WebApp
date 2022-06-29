@@ -75,7 +75,7 @@ export class PhSaleConfComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Sales configuration - BluMed")
+    this.titleService.setTitle("Sales configuration - Swahili")
       this.refreshMe();
   }
 

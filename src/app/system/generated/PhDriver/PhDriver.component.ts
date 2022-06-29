@@ -90,7 +90,7 @@ export class PhDriverComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Driver - BluMed")
+    this.titleService.setTitle("Driver - Swahili")
       this.refreshMe();
   }
 

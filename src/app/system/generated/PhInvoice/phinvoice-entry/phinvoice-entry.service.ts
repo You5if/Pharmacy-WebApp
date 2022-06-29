@@ -106,6 +106,13 @@ export class PhInvoiceEntryService {
             }), catchError(this._cf.handleError)
             );
            }
+           getBarcodeProduct(barcode: string){
+            return this.httpClient.get(this._globals.baseAPIUrl + 'PhProduct/bybarcode/' + barcode).pipe(
+            map((result: any) => {
+            return result;
+            }), catchError(this._cf.handleError)
+            );
+           }
            getProduct(id: number): Observable<phproductModel> {
             return this.httpClient.get<phproductModel>(this._globals.baseAPIUrl + 'PhProduct/' + id).pipe(
             map((result: phproductModel) => {  

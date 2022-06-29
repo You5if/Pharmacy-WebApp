@@ -32,7 +32,9 @@ import { Title } from '@angular/platform-browser';
 export class PhInvoiceComponent implements OnInit {
 
     displayedColumns: string[] =
-        ['select','phoneNumber','InvoiceNo', 'InvoiceDate', 'location', 'driverName', 'driverMobile', 'ccAgent', 'omRemarks', 'accRemarks', 'invoiceTotal', 'paymentTotal', 'report', 'state', 'pic', 'payment'];
+        ['select','InvoiceNo', 'InvoiceDate', 'invoiceTotal', 'report'];
+    // displayedColumns: string[] =
+    //     ['select','phoneNumber','InvoiceNo', 'InvoiceDate', 'location', 'driverName', 'driverMobile', 'ccAgent', 'omRemarks', 'accRemarks', 'invoiceTotal', 'paymentTotal', 'report', 'state', 'pic', 'payment'];
 
         direction: string;
   customerCode: string;
@@ -115,7 +117,7 @@ export class PhInvoiceComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Invoice - BluMed")
+    this.titleService.setTitle("Invoice - Swahili")
       this.refreshMe();
   }
 
@@ -536,13 +538,19 @@ export class PhInvoiceComponent implements OnInit {
     if (result === undefined) {
       this.dialogRef = this.dialog.open(PhInvoiceEntryComponent, {
         disableClose: true,
-        
+        maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
         data: {}
       });
     } else {
       this.dialogRef = this.dialog.open(PhInvoiceEntryComponent, {
         disableClose: true,
-        
+        maxWidth: '100vw',
+      maxHeight: '100vh',
+      height: '100%',
+      width: '100%',
         data: result
       });
     }

@@ -13,7 +13,7 @@ export class SystemHomeComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.titleService.setTitle("Welcome - BluMed")
+    this.titleService.setTitle("Welcome - Swahili")
     console.log("*\n**\n***\n****")
     console.log("****\n***\n**\n*")
     console.log("   *\n  * *\n * * *\n* * * *")

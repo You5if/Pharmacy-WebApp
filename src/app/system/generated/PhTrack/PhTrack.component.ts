@@ -75,7 +75,7 @@ export class PhTrackComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Tracking - BluMed")
+    this.titleService.setTitle("Tracking - Swahili")
       this.refreshMe();
   }
 

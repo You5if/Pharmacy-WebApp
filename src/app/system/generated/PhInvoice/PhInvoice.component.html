@@ -60,7 +60,7 @@
     <ng-container matColumnDef="InvoiceNo">      <mat-header-cell class="centH" *matHeaderCellDef>{{invoiceNo}}</mat-header-cell>     <mat-cell mat-cell class="cent" *matCellDef="let row">{{row.invoiceNo}}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="InvoiceDate">      <mat-header-cell class="centH" *matHeaderCellDef>{{invoiceDate}}</mat-header-cell>     <mat-cell mat-cell class="cent" *matCellDef="let row">{{row.invoiceDate}}</mat-cell>
+    <ng-container matColumnDef="InvoiceDate">      <mat-header-cell class="centH" *matHeaderCellDef>{{invoiceDate}}</mat-header-cell>     <mat-cell mat-cell class="cent" *matCellDef="let row">{{row.invoiceDate | date}}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="location">      <mat-header-cell class="centH" *matHeaderCellDef>{{location}}</mat-header-cell>     <mat-cell mat-cell class="cent" *matCellDef="let row">{{row.cityName}}</mat-cell>
     </ng-container>

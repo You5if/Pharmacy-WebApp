@@ -27,7 +27,7 @@ import { Title } from '@angular/platform-browser';
 export class PhProductComponent implements OnInit {
 
     displayedColumns: string[] =
-        ['select', 'categoryName', 'groupName', 'sciName', 'ProductCode', 'ProductName' ,'price'];
+        ['select', 'sciName', 'ProductCode', 'ProductName' ,'price'];
 
     dataSource: any;
     isLastPage = false;
@@ -91,7 +91,7 @@ export class PhProductComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Product - BluMed")
+    this.titleService.setTitle("Product - Swahili")
       this.refreshMe();
   }
 

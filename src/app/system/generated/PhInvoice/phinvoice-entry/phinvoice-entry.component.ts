@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { UIService } from 'src/app/components/shared/uiservices/UI.service';
 import { MessageBoxService } from 'src/app/components/messagebox/message-box.service';
 import { AuthService } from 'src/app/components/security/auth/auth.service';
 import { CommonService } from 'src/app/components/common/common.service';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MatInput, MAT_DIALOG_DATA } from '@angular/material';
 import { APIResultModel } from 'src/app/components/misc/APIResult.Model';
 import { Observable, of } from 'rxjs';
 import { SelectModel, SelectCodeModel } from 'src/app/components/misc/SelectModel';
@@ -122,6 +122,7 @@ export class PhInvoiceEntryComponent implements OnInit {
     model4 : Send
 
     breakpoint: number;
+    breakpoint2: number;
     checked= false;
     checkedR = false;
     disabled = false;
@@ -129,6 +130,7 @@ export class PhInvoiceEntryComponent implements OnInit {
     res: any;
     ReqExt: string
     spacepoint: any;
+    spacepoint2: any;
     spacezone: boolean;
     data: Sources[];
     ver: Sources;
@@ -173,7 +175,10 @@ export class PhInvoiceEntryComponent implements OnInit {
 
     child1Data: any;
     alarray: Sources[];
-    locPrice: number
+    locPrice: number;
+    isBarcode: boolean = false
+    Barcoded: boolean = false
+    Barcode: string
 
   constructor(
 	  private dapiService: PhInvoiceEntryService,
@@ -186,6 +191,7 @@ export class PhInvoiceEntryComponent implements OnInit {
       @Inject(MAT_DIALOG_DATA) public pModel: Send
   ) { }
 
+  @ViewChild('myBarcode') nameInput: MatInput;
   ngOnInit() {
     this.subTotal = 0
     this.totalTax = 0
@@ -217,7 +223,7 @@ export class PhInvoiceEntryComponent implements OnInit {
         this.data = res;
         console.log(this.data)
         if(localStorage.getItem(this._globals.baseAppName + '_Add&Edit2') == "Edit") {
-          this.Ext = true
+          this.Ext = false
           console.log(this.data.length)
         if(this.data.length > 0) {
           console.log(this.data[0].value)
@@ -267,7 +273,11 @@ export class PhInvoiceEntryComponent implements OnInit {
           }
         }
         this.breakpoint =
-        window.innerWidth <= 960
+        window.innerWidth <= 1350
+          ? 1
+          : this.data[0].maxRowSize;
+        this.breakpoint2 =
+        window.innerWidth <= 1350
           ? 1
           : this.data[0].maxRowSize;
   
@@ -283,6 +293,254 @@ export class PhInvoiceEntryComponent implements OnInit {
       })
   }
 
+  onResults(id:number, e:any, i:number) {
+    console.log('ee',e);
+    
+    this.last.child1[i].records.forEach((res:any) => {
+      if (res.tableColumnId === id) {
+        console.log('ee', e);
+        
+        res.value = e.toString()
+        if(res.tableColumnId === 588) {
+          this.onChangeValue(res.value, i)
+        }
+        
+      }
+    })
+  }
+
+  addChildFromBarcode(id:number, productId: number) {  
+    let myElem = {
+      records: [],
+      auditColumn: {
+        approvalStatusId: 1100001,
+        companyId: 10001,
+        branchId: 201,
+        financialYearId: 1,
+        userId: 1,
+        mACAddress: "unidentified",
+        hostName: "unidentified",
+        iPAddress: "unidentified",
+        deviceType: "Win32"
+      }
+    }
+    let childElemDark2 = {
+      records: [],
+      auditColumn: {
+        approvalStatusId: 1100001,
+        companyId: 10001,
+        branchId: 201,
+        financialYearId: 1,
+        userId: 1,
+        mACAddress: "unidentified",
+        hostName: "unidentified",
+        iPAddress: "unidentified",
+        deviceType: "Win32"
+      }
+    }
+    this.model2 = {
+      tableId: 79,
+      recordId: id,
+      userId: 26,
+      roleId: 2,
+      languageId: +localStorage.getItem(this._globals.baseAppName + '_language')
+    };
+    let fresh = {
+      access: "ViewOnly",
+    accessId: 0,
+    applicationOrder: 0,
+    cssClass: "",
+    designOrder:0,
+    direction: "",
+    entryMode: "A",
+    groupName: "",
+    inTransaction: true,
+    instruction: "",
+    label: "",
+    language: "",
+    max: 0,
+    maxRowSize: 0,
+    min: 0,
+    recordId: 0,
+    refColumn: "",
+    refCondition: "",
+    refId: "",
+    refTable: "",
+    tableColumnId: 90909,
+    tableId: 0,
+    type: "myType",
+    value: "",
+    myarray: 0,
+    myarray2: 0
+    };
+    this._ui.loadingStateChanged.next(true);
+    this.dapiService.child1Controllers(this.model2).subscribe((res) => {
+      this._ui.loadingStateChanged.next(false);
+      
+      this.childElemInit = res
+      console.log("yousif",this.childElemInit)
+      this.childElemInit.push(fresh)
+      console.log(this.childElemInit)
+      this.dropListItem.push(this.childElemInit[2])
+
+      this.childElemInit[2].value = productId.toString()
+  this.childElemInit[3].value = "1"
+     
+      for(let k=0;k<this.dropListItem.length;k++) {
+        console.log("loop cycle" + k)
+        this.dropItemchild = this.dropListItem[k]
+        console.log("DropitemTax", this.dropItemchild)
+
+            // this.tableId = this.dropItem.refId;
+            // this.tableName = this.dropItem.refTable;`
+            // this.displayColumn = this.dropItem.refColumn;
+            // this.condition = this.dropItem.refCondition;
+            
+            
+           
+              this._select.getDropdown(this.dropItemchild.refId, this.dropItemchild.refTable, this.dropItemchild.refColumn, this.dropItemchild.refCondition, false).subscribe((res: SelectModel[]) => {
+                // console.log("drop: ", res);
+                this.dropListItem[k].myarray = res;
+                this.onChangeValue(+this.dropListItem[k].value, k )          
+              });
+           
+
+            
+            
+          
+        
+        // this.container.push(res);
+        // console.log(this.container)
+
+
+    
+  }
+
+
+  // this.childElemInit[2].value = productId.toString()
+  // this.childElemInit[3].value = "1"
+      // this.dapiService.getProductPricing2(productId).subscribe((resu: productPricingModel) => {
+      //   this._ui.loadingStateChanged.next(false);
+      //   console.log(resu)
+      //   this.childElemInit[5].myarray = resu
+      //   this.childElemInit[5].value = resu.price.toString()
+      //   this.childElemInit[6].value = (+this.childElemInit[3].value * +this.childElemInit[5].value).toString()
+      //   // this.subTotal += +res[5].value
+      //   // this.GTotal += +res[5].value
+      // })
+  
+  
+      
+
+      for(let i=0;i<this.childElemInit.length;i++){
+        this.verCh2 = this.childElemInit[i]
+        childElemDark2.records.push(this.verCh2);
+        
+
+      }
+      this.lastDark.child1.push(childElemDark2);
+      this.subAgrand()
+      this.childElemInit.forEach((itemE) =>{
+        if (itemE && itemE.inTransaction && itemE.access != "NoAccess"){
+          
+          // this.childElem.records.push(itemE);
+          myElem.records.push(itemE)
+          
+  
+        }else{
+          
+            this.childElemDark.push(this.verCh2);
+            // console.log(this.childElemDark)
+          
+  
+  
+        }
+      })
+
+      
+      // this.childElem = res
+      // console.log(JSON.stringify(this.child1Data))
+      this.childElem2 = null
+      this.childElem2 = this.childElem
+      // myElem.records.push(this.fresh)
+
+      //this.last.child1.push(this.childElem2);
+      this.last.child1.push(myElem)
+
+      
+        for (let i = 0; i < this.lastDark.child1.length; i++) {
+          this.dapiService.getAvailableStock(this.lastDark.child1[i].records[2].value).subscribe((res: productStockModel) => {
+            this.lastDark.child1[i].records[10].availableStock = res.stock.toString()
+            this.last.child1[i].records[10].availableStock = res.stock.toString()
+          })
+          this.lastDark.child1[i].records[10].externalPharm = "-"
+            this.lastDark.child1[i].records[10].available =  "-"
+            this.lastDark.child1[i].records[10].unitPrice = "-"
+            this.lastDark.child1[i].records[10].totalPrice =  "-"
+            this.lastDark.child1[i].records[10].grandTotal =  "-"
+
+          this.dapiService.getEx(this.lastDark.child1[i].records[0].value).subscribe((res) => {
+            console.log(res);
+            
+            this.lastDark.child1[i].records[10].externalPharm = res.pharmName.toString()
+            this.lastDark.child1[i].records[10].available = res.avQuantity.toString()
+            this.lastDark.child1[i].records[10].unitPrice = res.unitPrice.toString()
+            this.lastDark.child1[i].records[10].totalPrice = res.totalPrice.toString()
+            this.lastDark.child1[i].records[10].grandTotal = res.totalPrice.toString()
+            
+          })
+
+          this.dapiService.getProduct(+this.lastDark.child1[i].records[2].value).subscribe((res: phproductModel) => {
+            console.log(res);
+            var con: string = this.lastDark.child1[i].records[4].refCondition + res.phSaleUnitId.toString()
+            console.log(con);
+            
+            
+            
+            this._select.getDropdown(this.lastDark.child1[i].records[4].refId, this.lastDark.child1[i].records[4].refTable, this.lastDark.child1[i].records[4].refColumn, con, false).subscribe((res2: SelectModel[]) => {
+              console.log("drop: ", res2);
+              this.lastDark.child1[i].records[4].myarray = res2;
+              this.last.child1[i].records[4].myarray = res2;
+              
+              
+            });
+            
+          })
+          
+    
+          
+        
+        
+        
+      }
+      this.subAgrand()
+      
+      
+      
+      
+      
+      
+     
+      
+    })
+    console.log("child1 final", this.last)
+    console.log("DarlDarl",this.lastDark)
+    console.log(this.data);
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+  }
   addChild1ExpenseItem(id:number) {  
     let myElem = {
       records: [],
@@ -505,7 +763,30 @@ export class PhInvoiceEntryComponent implements OnInit {
   //   console.log(this.lastDark);
   //   console.log(this.lastDark.child1.length);
 
-    
+    onBarcode(event: any) {
+      console.log(event.checked);
+      if (event.checked === true) {
+        this.Barcoded = true
+        this.nameInput.focus();
+      }else {
+        this.Barcoded = false
+      }
+    }
+
+    onBarcodeChange(event: any) {
+      // console.log("Barcode is:", event);
+      this.dapiService.getBarcodeProduct(event).subscribe((result) => {
+        if (result != null) {
+          console.log(result);
+          this.addChildFromBarcode(0, result.phProductId)
+          this.nameInput.value = ""
+          this.subAgrand()
+        }
+        
+      })
+      this.subAgrand()
+      
+    }
    
   // }
   onReqExt() {
@@ -685,13 +966,13 @@ export class PhInvoiceEntryComponent implements OnInit {
     console.log(id);
     this.dapiService.getProductPricing2(id).subscribe((resu: productPricingModel) => {
       this._ui.loadingStateChanged.next(false);
-      console.log(resu)
+      console.log("lolo:",resu)
       this.lastDark.child1[id2].records[5].myarray = resu
       this.lastDark.child1[id2].records[5].value = resu.price.toString()
       this.lastDark.child1[id2].records[6].value = (+this.lastDark.child1[id2].records[3].value * +this.lastDark.child1[id2].records[5].value).toString()
+      this.subAgrand()
       
     })
-    this.subAgrand()
   
     
     
@@ -828,11 +1109,21 @@ export class PhInvoiceEntryComponent implements OnInit {
 
   onResize(event) {
     this.spacepoint =
-      event.target.innerWidth <= 960
+      event.target.innerWidth <= 1350
         ? (this.spacezone = false)
         : (this.spacezone = true);
     this.breakpoint =
-      event.target.innerWidth <= 960
+      event.target.innerWidth <= 1350
+        ? 1
+        : this.data[0].maxRowSize;
+  }
+  onResize2(event) {
+    this.spacepoint2 =
+      event.target.innerWidth <= 1350
+        ? (this.spacezone = false)
+        : (this.spacezone = true);
+    this.breakpoint2 =
+      event.target.innerWidth <= 1350
         ? 1
         : this.data[0].maxRowSize;
   }

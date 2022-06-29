@@ -193,30 +193,30 @@ export class PhProductEntryComponent implements OnInit {
       })
   }
 
-  public uploadFinished = (event) => { // this is event being called when file gets uploaded
+//   public uploadFinished = (event) => { // this is event being called when file gets uploaded
     
-    const file: FileListModel = {
-        originalFileName: event.originalFileName,
-        fileName: event.fileName,
-        extention: event.extention,
-        fullPath: event.fullPath,
-        apiPath: event.apiPath,
-        apiImagePath: event.apiPath
-    };
-    this.lFiles.push(file); 
-    console.log(file.fullPath);
+//     const file: FileListModel = {
+//         originalFileName: event.originalFileName,
+//         fileName: event.fileName,
+//         extention: event.extention,
+//         fullPath: event.fullPath,
+//         apiPath: event.apiPath,
+//         apiImagePath: event.apiPath
+//     };
+//     this.lFiles.push(file); 
+//     console.log(file.fullPath);
     
-    this.imagePathUrl2 = this.imgHttp.concat(file.fullPath.substring(file.fullPath.indexOf('h') + 1))
-    console.log(this.imagePathUrl2);
+//     this.imagePathUrl2 = this.imgHttp.concat(file.fullPath.substring(file.fullPath.indexOf('h') + 1))
+//     console.log(this.imagePathUrl2);
     
-    this.showit = true
-    // and it pushes the files to this array also, then why doesnt it show?
-    // this.data = this.lFiles;
-    // this.validatedisabled = false
-    // this.validatedisabledmethod();
-    // bro problem is not this component, it somehow is not reflecting in other two... the files which i brought here..
-    // yea i was just making sure they were leaving here correctly.. now i will go to step 2, sorry ok
-}
+//     this.showit = true
+//     // and it pushes the files to this array also, then why doesnt it show?
+//     // this.data = this.lFiles;
+//     // this.validatedisabled = false
+//     // this.validatedisabledmethod();
+//     // bro problem is not this component, it somehow is not reflecting in other two... the files which i brought here..
+//     // yea i was just making sure they were leaving here correctly.. now i will go to step 2, sorry ok
+// }
 
 onChangeValue(id: number) {
   this.stringOfV = id.toString()

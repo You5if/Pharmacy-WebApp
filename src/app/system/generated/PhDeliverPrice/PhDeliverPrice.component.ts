@@ -85,7 +85,7 @@ export class PhDeliverPriceComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Delivery pricing - BluMed")
+    this.titleService.setTitle("Delivery pricing - Swahili")
       this.refreshMe();
   }
 

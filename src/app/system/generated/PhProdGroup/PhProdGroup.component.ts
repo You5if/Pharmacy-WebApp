@@ -86,7 +86,7 @@ export class PhProdGroupComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Product group - BluMed")
+    this.titleService.setTitle("Product group - Swahili")
       this.refreshMe();
   }
 

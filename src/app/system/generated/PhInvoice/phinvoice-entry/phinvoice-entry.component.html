@@ -8,9 +8,8 @@
     <img (click)="onCancel()" class="cancel_Img" src="../../../../assets/images/svg/close.png" alt="">
   </div>
 
-
   <form class="Main" [dir]="direction"  >
-    <div class="container">
+    <div fxLayout="column" fxLayoutGap="5px" class="cardContainer">
       <mat-grid-list
         [cols]="breakpoint"
         rowHeight="90px"
@@ -363,12 +362,12 @@
     <div *ngIf="Ext" class="Extbtn">
       <button class="BtnE" type="button" mat-button (click)="onReqExt()">{{ReqExt}}</button>
     </div>
-    <div fxLayout="column" fxLayoutGap="10px" class="cardContainer">
-      <mat-card fxLayout="column" class="card" *ngFor="let sourceChild1 of last.child1;  let i = index" [attr.data-index]="i">
+    <div fxLayout="column" fxLayoutGap="5px" class="cardContainer">
+      <div fxLayout="column" class="{{breakpoint2 < 1350 ? 'card2' : 'card'}}" *ngFor="let sourceChild1 of last.child1;  let i = index" [attr.data-index]="i">
         <mat-grid-list
-        [cols]="breakpoint"
-        rowHeight="130px"
-        (window:resize)="onResize($event)"
+        [cols]="breakpoint2"
+        rowHeight="85px"
+        (window:resize)="onResize2($event)"
         
       >
         <div  *ngFor="let source of sourceChild1.records">
@@ -420,7 +419,7 @@
                         appIsDecimalDirective
                       />
       
-                      <!-- <mat-hint align="end">{{ pwInput.value?.length }} / 6</mat-hint> -->
+                     
                     </mat-form-field>
                   </div>
                   
@@ -440,7 +439,7 @@
                         appIsDecimalDirective
                       />
       
-                      <!-- <mat-hint align="end">{{ pwInput.value?.length }} / 6</mat-hint> -->
+                   
                     </mat-form-field>
                   </div>
                 </div>
@@ -457,7 +456,6 @@
                     
                   />
   
-                  <!-- <mat-hint align="end">{{ pwInput.value?.length }} / 6</mat-hint> -->
                 </mat-form-field>
                 <div
                   fxLayout
@@ -513,9 +511,18 @@
                 </div>
               </div>
             </mat-grid-tile>
+            <mat-grid-tile *ngSwitchCase="'autocomplete'">
+              <div [ngSwitch]="source.access">
+                <div *ngSwitchCase="'Editable'">
+                 
+                    <app-my-test-auto [refId]="source.refId" [refCondition]="source.refCondition" [refTable]="source.refTable" [refColumn]="source.refColumn" [labelValue]="source.label" [initialValue]="source.value" (resultId)="onResults(source.tableColumnId, $event, i)"></app-my-test-auto>
+                 
+                </div>
+              </div>
+            </mat-grid-tile>
             <mat-grid-tile  *ngSwitchCase="'myType'">
               
-              <div fxLayout="column">
+              <div fxLayout class="avaBox">
                 <div fxLayout fxLayoutGap="2px">
                   <h4 class="fontYA">
                     Available (stock)
@@ -524,8 +531,16 @@
                   <h4 class="fontYA">
                     {{ source.availableStock }}
                   </h4>
+                  
                 </div>
-                <div fxLayout fxLayoutGap="2px">
+                <div class="deleteBtn">
+                  <button mat-icon-button type="button" (click)="deleteFun(i)">
+                    <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true" color="warn">
+                      delete
+                    </mat-icon>
+                  </button>
+                </div>
+                <!-- <div fxLayout fxLayoutGap="2px">
                   <h4 class="fontYA">
                     Ex. pharmacy
                   </h4>
@@ -569,7 +584,7 @@
                   <h4 class="fontYA">
                     {{ source.grandTotal }}
                   </h4>
-                </div>
+                </div> -->
               </div>
             </mat-grid-tile>
 
@@ -788,34 +803,41 @@
             
           </div>
         </div>
+        
       </mat-grid-list>
-      <button mat-icon-button type="button" (click)="deleteFun(i)">
-        <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true" color="warn">
-          delete
-        </mat-icon>
-      </button>
-      </mat-card>
+      
+    </div>
     </div>
     <div class="btn-container">
       <!-- <button mat-raised-button color="primary" (click)="addChild1ExpenseItem(0)" type="submit">Add</button> -->
       <button mat-raised-button  class="add_btn" type="button" (click)="addChild1ExpenseItem(0)">
         + Add item
         </button>
+        <mat-checkbox
+        class="topAdjust2"
+        [ngModel]="isBarcode"
+        [ngModelOptions]="{standalone: true}"
+        (change)="onBarcode($event)" 
+        >&nbsp; &nbsp; <i class="fa fa-barcode"></i><i class="fa fa-barcode"></i></mat-checkbox>
+        <mat-form-field class="topAdjust" *ngIf="Barcoded" appearance="outline">
+          <input type="text" matInput #myBarcode="matInput" [ngModel]="Barcode" (input)="onBarcodeChange($event.target.value)">
+        </mat-form-field>
     </div>
     
   </form>
+
   <div class="bot">
     <div class="botTotal">
       <div fxLayout fxLayoutGap="5px">
         <h4 class="fontY2">
-          Sub-Total
+          Grand Total
         </h4>
-        <h4 class="fontY2">:</h4>
+        <h4 class="fontY2"> : </h4>
         <h4 class="fontY2">
           {{ subTotal }}
         </h4>
       </div>
-      <div fxLayout fxLayoutGap="5px">
+      <!-- <div fxLayout fxLayoutGap="5px">
         <h4 class="fontY2">
           Discount
         </h4>
@@ -832,16 +854,16 @@
         <h4 class="fontY2">
           {{ locPrice }}
         </h4>
-      </div>
-      <div fxLayout fxLayoutGap="5px">
+      </div> -->
+      <!-- <div fxLayout fxLayoutGap="5px">
         <h4 class="fontY2">
           Grand Total
         </h4>
-        <h4 class="fontY2">:</h4>
+        <h4 class="fontY2"> = </h4>
         <h4 class="fontY2">
           {{ GTotal }}
         </h4>
-      </div>
+      </div> -->
     </div>
     <div class="btn-container2" fxLayoutGap="10px">
     
@@ -852,21 +874,7 @@
       type="submit" mat-button class="BtnS">{{submit}}</button> -->
   </div>
                     </div>
-  <!-- <div class="btn-container">
-    <h4>{{ subTotal }}</h4>
-    <button class="BtnC" (click)="onCancel()" mat-button color="warn" type="submit">{{cancel}}</button>
-    <button class="BtnS" (click)="onSubmit()" mat-button color="primary" type="submit">{{submit}}</button>
-    <div fxLayout fxLayoutGap="10px">
-      <div fxLayout fxLayoutGap="5px">
-        <h4>Tax</h4>
-      <h4>{{ totalTax }}</h4>
-      </div>
-      <div fxLayout fxLayoutGap="5px">
-        <h4>Grand total</h4>
-      <h4>{{ total }}</h4>
-      </div>
-    </div>
-  </div> -->
+ 
 </section>
 
 

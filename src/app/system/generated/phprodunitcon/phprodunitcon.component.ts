@@ -87,7 +87,7 @@ export class PhProdUnitConComponent implements OnInit {
       }
 
   ngOnInit() {
-    this.titleService.setTitle("Product unit conversion - BluMed")
+    this.titleService.setTitle("Product unit conversion - Swahili")
       this.refreshMe();
   }
 
