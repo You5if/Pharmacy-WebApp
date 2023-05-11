@@ -8,9 +8,12 @@ export class AppGlobals {
   //  readonly baselandingappurl: string = 'http://localhost:4200/';
 
   /* Development Server */
-  readonly baseDomainUrl: string = "qualityhouse.auto-paymcs.com";
-  readonly baseAppUrl: string = "http://qualityhouse.auto-paymcs.com/";
-  readonly baseLandingAppUrl: string = "http://qualityhouse.auto-paymcs.com/";
+  // readonly baseDomainUrl: string = "qualityhouse.auto-paymcs.com";
+  readonly baseDomainUrl: string = "http://49.50.77.201/qualityhouse/";
+  // readonly baseAppUrl: string = "http://qualityhouse.auto-paymcs.com/";
+  readonly baseAppUrl: string = "http://49.50.77.201/qualityhouse/";
+  // readonly baseLandingAppUrl: string = "http://qualityhouse.auto-paymcs.com/";
+ readonly baseLandingAppUrl: string = "http://49.50.77.201/qualityhouse/";
 
   /* Live Server */
   // readonly baseDomainUrl: string = "aladdinshipping.com";
@@ -23,9 +26,12 @@ export class AppGlobals {
   //   readonly baseAPIRootUrl: string = 'https://localhost:44377/api/';
 
   /* Development Server */
-  readonly baseAPIFileUrl: string = "http://pharmacyapi.autopay-mcs.com/api/";
-  readonly baseAPIUrl: string = "http://pharmacyapi.autopay-mcs.com/api/";
-  readonly baseAPIRootUrl: string = "http://pharmacyapi.autopay-mcs.com/api/";
+  readonly baseAPIFileUrl: string = "http://49.50.77.201/pharmacyapi/api/";
+  readonly baseAPIUrl: string = "http://49.50.77.201/pharmacyapi/api/";
+  readonly baseAPIRootUrl: string = "http://49.50.77.201/pharmacyapi/api/";
+  // readonly baseAPIFileUrl: string = "http://pharmacyapi.autopay-mcs.com/api/";
+  // readonly baseAPIUrl: string = "http://pharmacyapi.autopay-mcs.com/api/";
+  // readonly baseAPIRootUrl: string = "http://pharmacyapi.autopay-mcs.com/api/";
 
   /* Live Server */
   // readonly baseAPIFileUrl: string = "https://appapi.aladdinshipping.com/";
@@ -33,8 +39,10 @@ export class AppGlobals {
   // readonly baseAPIRootUrl: string = "https://appapi.aladdinshipping.com/api/";
 
   /* Development Server */
-  readonly baseReportUrl: string = 'http://pharmacyreports.autopay-mcs.com/default.aspx?';
-  readonly baseReportEmailUrl: string = 'http://shippingreports.autopay-mcs.com/default2.aspx?';
+  readonly baseReportUrl: string = 'http://49.50.77.201/pharmacyreports/default.aspx?';
+  readonly baseReportEmailUrl: string = 'http://49.50.77.201/shippingreports/default2.aspx?';
+  // readonly baseReportUrl: string = 'http://pharmacyreports.autopay-mcs.com/default.aspx?';
+  // readonly baseReportEmailUrl: string = 'http://shippingreports.autopay-mcs.com/default2.aspx?';
 
   /* Live Server */
   // readonly baseReportUrl: string =
